@@ -186,7 +186,7 @@ export default function App() {
       </main>
 
       <footer className="app-footer">
-        <p>© 2026 Best Deal Store. All rights reserved. Created by Idris Jovial SOP - Student Number: 041199877</p>
+        <p>© 2026 Best Deal Store. All rights reserved. Created by Idris Jovial SOP NWABO - Student Number: 041199877</p>
       </footer>
     </div>
   );
