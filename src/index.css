@@ -2,6 +2,24 @@
 
 body { font-family: system-ui, sans-serif; background: #f5f5f5; color: #222; }
 
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 1.25rem 1rem;
+  font-size: 0.875rem;
+  color: #666;
+  background: #fafafa;
+  border-top: 1px solid #e8e8e8;
+}
+
+.app-footer p { max-width: 1100px; margin: 0 auto; }
+
 header {
   background: #003087; color: #fff; padding: 1rem 2rem;
   display: flex; align-items: center; justify-content: space-between;
@@ -19,7 +37,7 @@ header nav button:hover, header nav button.active { background: #0050c8; }
   padding: 1px 7px; font-size: .75rem; font-weight: 700; margin-left: 4px;
 }
 
-main { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+main { flex: 1; max-width: 1100px; width: 100%; margin: 2rem auto; padding: 0 1rem; }
 
 h2 { margin-bottom: 1.2rem; font-size: 1.3rem; }
 

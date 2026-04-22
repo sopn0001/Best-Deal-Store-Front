@@ -92,7 +92,7 @@ export default function App() {
   }
 
   return (
-    <>
+    <div className="app-shell">
       <header>
         <h1>🛍 Best Deal Store</h1>
         <nav>
@@ -184,6 +184,10 @@ export default function App() {
           </>
         )}
       </main>
-    </>
+
+      <footer className="app-footer">
+        <p>© 2026 Best Deal Store. All rights reserved.</p>
+      </footer>
+    </div>
   );
 }
