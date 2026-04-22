@@ -1,0 +1,79 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { font-family: system-ui, sans-serif; background: #f5f5f5; color: #222; }
+
+header {
+  background: #003087; color: #fff; padding: 1rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+header h1 { font-size: 1.4rem; letter-spacing: .5px; }
+header nav button {
+  background: none; border: none; color: #fff; cursor: pointer;
+  font-size: 1rem; margin-left: 1.2rem; padding: .3rem .6rem;
+  border-radius: 4px; transition: background .2s;
+}
+header nav button:hover, header nav button.active { background: #0050c8; }
+
+.badge {
+  background: #ffd000; color: #003087; border-radius: 99px;
+  padding: 1px 7px; font-size: .75rem; font-weight: 700; margin-left: 4px;
+}
+
+main { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+
+h2 { margin-bottom: 1.2rem; font-size: 1.3rem; }
+
+/* Cards */
+.grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 1.2rem; }
+.card {
+  background: #fff; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.1);
+  padding: 1.2rem; display: flex; flex-direction: column; gap: .6rem;
+}
+.card h3 { font-size: 1rem; }
+.card .price { font-weight: 700; color: #003087; font-size: 1.1rem; }
+.card .stock { font-size: .8rem; color: #666; }
+.card button { margin-top: auto; }
+
+/* Buttons */
+button.primary {
+  background: #003087; color: #fff; border: none; padding: .55rem 1.2rem;
+  border-radius: 6px; cursor: pointer; font-size: .9rem; transition: background .2s;
+}
+button.primary:hover { background: #0050c8; }
+button.secondary {
+  background: #fff; color: #003087; border: 2px solid #003087;
+  padding: .45rem 1rem; border-radius: 6px; cursor: pointer; font-size: .9rem;
+}
+button.danger { background: #d32f2f; color: #fff; border: none; padding: .45rem 1rem; border-radius: 6px; cursor: pointer; }
+
+/* Chips */
+.chip-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.2rem; }
+.chip {
+  padding: .4rem .9rem; border-radius: 99px; border: 2px solid #003087;
+  background: #fff; cursor: pointer; font-size: .85rem; transition: all .2s;
+}
+.chip.active, .chip:hover { background: #003087; color: #fff; }
+
+/* Cart */
+.cart-item { display: flex; justify-content: space-between; align-items: center; padding: .7rem 0; border-bottom: 1px solid #eee; }
+.cart-total { font-size: 1.2rem; font-weight: 700; text-align: right; margin: 1rem 0; }
+
+/* Form */
+.form { display: flex; flex-direction: column; gap: .9rem; max-width: 500px; }
+.form input, .form select {
+  padding: .6rem .8rem; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem;
+}
+.form label { font-weight: 600; font-size: .9rem; }
+
+/* Orders */
+.order-card {
+  background: #fff; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.1);
+  padding: 1.2rem; margin-bottom: 1rem;
+}
+.order-card h3 { margin-bottom: .5rem; }
+.status { display: inline-block; padding: .2rem .7rem; border-radius: 99px; font-size: .8rem; font-weight: 700; }
+.status.pending    { background: #fff3cd; color: #856404; }
+.status.processing { background: #cfe2ff; color: #084298; }
+.status.completed  { background: #d1e7dd; color: #0a3622; }
+
+.empty { color: #888; font-style: italic; margin-top: 2rem; text-align: center; }
