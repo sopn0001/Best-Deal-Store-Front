@@ -1,6 +1,27 @@
 import { useState, useEffect } from 'react';
 
-const api = (path, opts) => fetch(path, opts).then(r => r.json());
+/** Fetch JSON; on error or non-array for list routes, return fallback (never throws). */
+async function apiJson(path, opts, fallback = null) {
+  try {
+    const res = await fetch(path, { ...opts, headers: { Accept: 'application/json', ...opts?.headers } });
+    const text = await res.text();
+    let data;
+    try {
+      data = text && text.trim() ? JSON.parse(text) : null;
+    } catch {
+      console.error('API not JSON:', path, res.status, text?.slice(0, 200));
+      return fallback;
+    }
+    if (!res.ok) {
+      console.error('API error:', path, res.status, data);
+      return fallback;
+    }
+    return data;
+  } catch (e) {
+    console.error('API fetch failed:', path, e);
+    return fallback;
+  }
+}
 
 export default function App() {
   const [tab, setTab]           = useState('shop');
@@ -13,8 +34,14 @@ export default function App() {
   const [msg, setMsg]               = useState('');
 
   useEffect(() => {
-    api('/categories').then(setCategories);
-    api('/products').then(setProducts);
+    (async () => {
+      const [cats, prods] = await Promise.all([
+        apiJson('/categories', undefined, []),
+        apiJson('/products', undefined, []),
+      ]);
+      setCategories(Array.isArray(cats) ? cats : []);
+      setProducts(Array.isArray(prods) ? prods : []);
+    })();
   }, []);
 
   const visibleProducts = activeCat
@@ -45,19 +72,23 @@ export default function App() {
       items: cart.map(i => ({ product_id: i.id, name: i.name, price: i.price, qty: i.qty })),
       total: cartTotal,
     };
-    const res = await api('/orders', {
+    const res = await apiJson('/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(order),
-    });
-    setMsg(`Order placed! ID: ${res.id}`);
-    setCart([]);
-    setForm({ name: '', email: '' });
+    }, null);
+    if (res && res.id) {
+      setMsg(`Order placed! ID: ${res.id}`);
+      setCart([]);
+      setForm({ name: '', email: '' });
+    } else {
+      setMsg('Could not place order. Is the order service running?');
+    }
   }
 
   async function loadOrders() {
-    const data = await api('/orders');
-    setOrders(data);
+    const data = await apiJson('/orders', undefined, []);
+    setOrders(Array.isArray(data) ? data : []);
   }
 
   return (
